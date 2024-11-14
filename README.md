@@ -1,1 +1,10 @@
-# Skinology
+## Team Members – C242-PS180
+| Member                             | Student ID        | Path                 | University                                  | Contact                              |
+|------------------------------------|-------------------|----------------------|---------------------------------------------|--------------------------------------------|
+| Callista Zada Fernanda             | M312B4KX0891      | Machine Learning     | Universitas Sebelas Maret                   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yogaciwapatra)      |
+| Samuel Matthew Batistuta           | M204B4KY4056      | Machine Learning     | Universitas Esa Unggul                      | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/athallah-reyhan/)   |
+| Willy                              | M204B4KY4489      | Machine Learning     | Universitas Esa Unggul                      | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dhiakash/)          |
+| Nur Trisya Novita                  | C134B4KX3425      | Cloud Computing      | Politeknik Negeri Sriwijaya                 | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aryonoer/)          |
+| Rika Yulia Sari                    | C251B4KX3862      | Cloud Computing      | Universitas Malikussaleh                    | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rismahasnaf/)       |
+| Cintia Ulima Cahyanto              |  A204B4KX0944     | Mobile Development   | Universitas Esa Unggul                      | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/reflyn-andyaz-845187191)        |
+  | Rayhan                           | A263B4KY3707      | Mobile Development   | Universitas Muhammadiyah Purwokerto         | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rayhan-ray-022933244/)                 
