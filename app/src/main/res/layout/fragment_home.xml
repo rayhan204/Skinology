@@ -46,7 +46,6 @@
             android:padding="8dp"
             android:gravity="center">
 
-            <!-- Button 1 with Text -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,7 +100,6 @@
                     android:gravity="center" />
             </LinearLayout>
 
-            <!-- Button 3 with Text -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,7 +175,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStory"
+        android:id="@+id/rvArticle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
