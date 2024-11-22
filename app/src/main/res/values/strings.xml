@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Skinology</string>
+    <string name="skinology">SKINOLOGY</string>
+    <string name="next">Lanjut -></string>
+    <string name="name_article">Judul</string>
+    <string name="result">Oily 90%</string>
+    <string name="date">2024–11–20 14:45:30</string>
+    <string name="title_home">Home</string>
+    <string name="title_article">Article</string>
+    <string name="title_camera">Camera</string>
+    <string name="title_history">History</string>
+    <string name="title_setting">Setting</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_on_boarding">imageOnBoarding</string>
+    <string name="onboarding_description">Kami sangat senang Anda bergabung dengan Skinology – aplikasi yang didesain untuk membantu Anda ....</string>
+    <string name="article_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="camera">Camera</string>
+    <string name="save">Save</string>
+    <string name="text_type_skin">Type kulit anda:</string>
+    <string name="article">Article</string>
+    <string name="history">History</string>
+    <string name="skin_detection">SkinType Detection</string>
+    <string name="setting">Setting</string>
+    <string name="recent_article">Recent Article</string>
+
+</resources>
