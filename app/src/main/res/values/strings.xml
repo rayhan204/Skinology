@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Skinology</string>
     <string name="skinology">SKINOLOGY</string>
-    <string name="next">Lanjut -></string>
+    <string name="next">Lanjut  -></string>
     <string name="name_article">Judul</string>
     <string name="result">Oily 90%</string>
     <string name="date">2024–11–20 14:45:30</string>
@@ -22,5 +22,6 @@
     <string name="skin_detection">SkinType Detection</string>
     <string name="setting">Setting</string>
     <string name="recent_article">Recent Article</string>
-
+    <string name="analyze">Analyze</string>
+    <string name="image">Image</string>
 </resources>
