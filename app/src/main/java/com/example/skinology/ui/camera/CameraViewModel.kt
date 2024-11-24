@@ -1,13 +1,17 @@
 package com.example.skinology.ui.camera
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.net.Uri
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
-class CameraViewModel : ViewModel() {
+class CameraViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        //value = "This is notifications Fragment"
+    companion object {
+        private const val IMAGE_URI_KEY = "IMAGE_URI_KEY"
     }
-    val text: LiveData<String> = _text
+    var currentImageUri: Uri?
+        get() = savedStateHandle[IMAGE_URI_KEY]
+        set(value) {
+            savedStateHandle[IMAGE_URI_KEY] = value
+        }
 }
