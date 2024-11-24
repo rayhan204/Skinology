@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_dry"
+            style="@style/Widget.MaterialComponents.Button"
+            android:backgroundTint="@color/secondary"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            app:cornerRadius="15dp"
+            android:textColor="@color/black"
+            android:text="Dry Skin"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_oily"
+            style="@style/Widget.MaterialComponents.Button"
+            android:backgroundTint="@color/secondary"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            app:cornerRadius="15dp"
+            android:text="Oily Skin"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_normal"
+            style="@style/Widget.MaterialComponents.Button"
+            android:backgroundTint="@color/secondary"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            app:cornerRadius="15dp"
+            android:text="Normal Skin"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+</LinearLayout>

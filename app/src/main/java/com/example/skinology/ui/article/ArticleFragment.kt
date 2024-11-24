@@ -1,5 +1,6 @@
 package com.example.skinology.ui.article
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.skinology.databinding.FragmentArticleBinding
+import com.example.skinology.databinding.FragmentCameraBinding
+import com.example.skinology.ui.article2.Articel2Activity
+import com.example.skinology.ui.cameraX.CameraX
 
 class ArticleFragment : Fragment() {
 
@@ -29,6 +33,10 @@ class ArticleFragment : Fragment() {
 
     private fun setupUI() {
         binding.progressBar.visibility = View.GONE
+        binding.buttonDry.setOnClickListener {
+            val intent = Intent(requireContext(), Articel2Activity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
