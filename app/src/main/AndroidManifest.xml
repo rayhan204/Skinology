@@ -22,6 +22,9 @@
             android:name=".ui.cameraX.CameraX"
             android:exported="false" />
         <activity
+            android:name=".ui.article2.Articel2Activity"
+            android:exported="false"/>
+        <activity
             android:name=".ui.result.ResultActivity"
             android:exported="false" />
         <activity
