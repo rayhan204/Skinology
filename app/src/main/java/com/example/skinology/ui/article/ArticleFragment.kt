@@ -2,6 +2,7 @@ package com.example.skinology.ui.article
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,11 +34,28 @@ class ArticleFragment : Fragment() {
 
     private fun setupUI() {
         binding.progressBar.visibility = View.GONE
+
         binding.buttonDry.setOnClickListener {
-            val intent = Intent(requireContext(), Articel2Activity::class.java)
-            startActivity(intent)
+            navigateToArticle2Activity("DRY")
+        }
+
+        binding.buttonOily.setOnClickListener {
+            navigateToArticle2Activity("OILY")
+        }
+
+        binding.buttonNormal.setOnClickListener {
+            navigateToArticle2Activity("NORMAL")
         }
     }
+
+    private fun navigateToArticle2Activity(selectedButton: String) {
+        Log.d("ArticleFragment", "Navigating with button: $selectedButton")
+        val intent = Intent(requireContext(), Articel2Activity::class.java)
+        intent.putExtra("SELECTED_BUTTON", selectedButton)
+        startActivity(intent)
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
