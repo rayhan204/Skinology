@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/know_dry_skin"
+        android:text="@string/know_your_skin"
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold"
