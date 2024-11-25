@@ -24,4 +24,8 @@
     <string name="recent_article">Recent Article</string>
     <string name="analyze">Analyze</string>
     <string name="image">Image</string>
+    <string name="time_to">Time To</string>
+    <string name="know_dry_skin">Know Dry Skin</string>
+    <string name="oily_skin">Oily Skin</string>
+    <string name="know_your_skin">Know Your Skin</string>
 </resources>
