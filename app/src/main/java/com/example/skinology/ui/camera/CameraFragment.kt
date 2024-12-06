@@ -18,21 +18,24 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.skinology.databinding.FragmentCameraBinding
+import com.example.skinology.helper.ImageClassifierHelper
 import com.example.skinology.ui.cameraX.CameraX
+import com.example.skinology.ui.result.ResultActivity
 import com.yalantis.ucrop.UCrop
+import org.tensorflow.lite.task.vision.classifier.Classifications
 import java.io.File
+import java.text.NumberFormat
 
 class CameraFragment : Fragment() {
 
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
+    private lateinit var imageClassifierHelper: ImageClassifierHelper
 
     private val cameraViewModel: CameraViewModel by viewModels()
 
     private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
                 Toast.makeText(requireContext(), "Permission request granted", Toast.LENGTH_SHORT).show()
             } else {
@@ -45,6 +48,7 @@ class CameraFragment : Fragment() {
             requireContext(),
             REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,12 +68,35 @@ class CameraFragment : Fragment() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
-        binding.buttonImg.setOnClickListener{ startGallery() }
-        binding.buttonCamera.setOnClickListener{ startCameraX() }
-        binding.buttonAnalyze.setOnClickListener{ analyze() }
+        imageClassifierHelper = ImageClassifierHelper(
+            context = requireContext(),
+            classifierListener = object : ImageClassifierHelper.ClassifierListener {
+                override fun onError(error: String) {
+                    showToast("Error: $error")
+                }
+
+                override fun onResult(result: List<Classifications>?, inferenceTime: Long) {
+                    result?.let { classifications ->
+                        if (classifications.isNotEmpty() && classifications[0].categories.isNotEmpty()) {
+                            val label = classifications[0].categories[0].label
+                            val score = NumberFormat.getPercentInstance()
+                                .format(classifications[0].categories[0].score).trim()
+
+                            val displayResult = "$label\n$score"
+                            moveToResult(displayResult)
+                        } else {
+                            showToast("Hasil prediksi tidak ditemukan")
+                        }
+                    }
+                }
+            }
+        )
+
+        binding.buttonImg.setOnClickListener { startGallery() }
+        binding.buttonCamera.setOnClickListener { startCameraX() }
+        binding.buttonAnalyze.setOnClickListener { analyze() }
 
         showImage()
-
     }
 
     private val cropActivityResultLauncher =
@@ -98,7 +125,6 @@ class CameraFragment : Fragment() {
             .let { cropActivityResultLauncher.launch(it) }
     }
 
-
     private fun setupUI() {
         binding.progressBar.visibility = View.GONE
     }
@@ -109,7 +135,7 @@ class CameraFragment : Fragment() {
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
-    ) { uri : Uri? ->
+    ) { uri: Uri? ->
         if (uri != null) {
             cameraViewModel.currentImageUri = uri
             startCrop(uri)
@@ -136,7 +162,19 @@ class CameraFragment : Fragment() {
     }
 
     private fun analyze() {
-        Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+        cameraViewModel.currentImageUri?.let {
+            imageClassifierHelper.classifyStaticImage(it)
+        } ?: run {
+            showToast("Silahkan pilih gambar terlebih dahulu")
+        }
+    }
+
+    private fun moveToResult(displayResult: String) {
+        val intent = Intent(requireContext(), ResultActivity::class.java).apply {
+            putExtra("IMAGE_URI", cameraViewModel.currentImageUri.toString())
+            putExtra("RESULT", displayResult)
+        }
+        startActivity(intent)
     }
 
     private fun showImage() {
@@ -146,7 +184,6 @@ class CameraFragment : Fragment() {
             binding.previewImageView.setImageURI(uri)
         }
     }
-
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
@@ -160,5 +197,4 @@ class CameraFragment : Fragment() {
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
-
 }

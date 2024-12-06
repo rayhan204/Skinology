@@ -9,8 +9,6 @@ import com.example.skinology.data.local.entity.HistoryEntity
 @Database(entities = [HistoryEntity::class], version = 1, exportSchema = false)
 abstract class SkinologyDatabase : RoomDatabase() {
 
-    abstract fun skinologyDao(): SkinologyDao
-
     companion object {
         @Volatile
         private var INSTANCE: SkinologyDatabase? = null
