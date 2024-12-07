@@ -22,6 +22,7 @@ import com.example.skinology.helper.ImageClassifierHelper
 import com.example.skinology.ui.cameraX.CameraX
 import com.example.skinology.ui.result.ResultActivity
 import com.yalantis.ucrop.UCrop
+import com.example.skinology.ViewModelFactory
 import org.tensorflow.lite.task.vision.classifier.Classifications
 import java.io.File
 import java.text.NumberFormat
@@ -32,7 +33,9 @@ class CameraFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var imageClassifierHelper: ImageClassifierHelper
 
-    private val cameraViewModel: CameraViewModel by viewModels()
+    private val cameraViewModel: CameraViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->

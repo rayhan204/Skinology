@@ -4,18 +4,75 @@ import com.google.gson.annotations.SerializedName
 
 data class ArticleResponse(
 
-	@field:SerializedName("data")
-	val data: List<DataItem?>? = null,
+	@field:SerializedName("normal")
+	val normal: List<NormalItem>,
 
-	@field:SerializedName("message")
-	val message: String? = null
+	@field:SerializedName("oily")
+	val oily: List<OilyItem>,
+
+	@field:SerializedName("acne")
+	val acne: List<AcneItem>,
+
+	@field:SerializedName("dry")
+	val dry: List<DryItem>
 )
 
-data class DataItem(
+data class AcneItem(
 
-	@field:SerializedName("skinType")
-	val skinType: String? = null,
+	@field:SerializedName("name")
+	val name: String,
 
-	@field:SerializedName("topics")
-	val topics: List<String?>? = null
+	@field:SerializedName("photo")
+	val photo: String,
+
+	@field:SerializedName("description")
+	val description: String,
+
+	@field:SerializedName("id")
+	val id: Int
+)
+
+data class OilyItem(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("photo")
+	val photo: String,
+
+	@field:SerializedName("description")
+	val description: String,
+
+	@field:SerializedName("id")
+	val id: Int
+)
+
+data class NormalItem(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("photo")
+	val photo: String,
+
+	@field:SerializedName("description")
+	val description: String,
+
+	@field:SerializedName("id")
+	val id: Int
+)
+
+data class DryItem(
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("photo")
+	val photo: String,
+
+	@field:SerializedName("description")
+	val description: String,
+
+	@field:SerializedName("id")
+	val id: Int
 )
