@@ -48,26 +48,34 @@ class ButtonsFragment : Fragment() {
 
     private fun setupButtonBehavior() {
         binding.buttonDry.setOnClickListener {
-            activateButton(binding.buttonDry, binding.buttonOily, binding.buttonNormal)
+            activateButton(binding.buttonDry, binding.buttonOily, binding.buttonNormal, binding.buttonAcne)
             buttonSelectionListener?.onButtonSelected("DRY")
         }
         binding.buttonOily.setOnClickListener {
-            activateButton(binding.buttonOily, binding.buttonDry, binding.buttonNormal)
+            activateButton(binding.buttonOily, binding.buttonDry, binding.buttonNormal, binding.buttonAcne)
             buttonSelectionListener?.onButtonSelected("OILY")
         }
         binding.buttonNormal.setOnClickListener {
-            activateButton(binding.buttonNormal, binding.buttonDry, binding.buttonOily)
+            activateButton(binding.buttonNormal, binding.buttonDry, binding.buttonOily, binding.buttonAcne)
             buttonSelectionListener?.onButtonSelected("NORMAL")
         }
+        // Add listener for Acne button
+        binding.buttonAcne.setOnClickListener {
+            activateButton(binding.buttonAcne, binding.buttonDry, binding.buttonOily, binding.buttonNormal)
+            buttonSelectionListener?.onButtonSelected("ACNE")
+        }
 
+        // Set default selected button
         when (selectedButton) {
             "DRY" -> binding.buttonDry.performClick()
             "OILY" -> binding.buttonOily.performClick()
             "NORMAL" -> binding.buttonNormal.performClick()
-            else -> { "Tidak ada yang dipilih" }
+            "ACNE" -> binding.buttonAcne.performClick()
+            else -> { "No button selected" }
         }
     }
-    private fun activateButton(active: View, inactive1: View, inactive2: View) {
+
+    private fun activateButton(active: View, inactive1: View, inactive2: View, inactive3: View) {
         (active as? MaterialButton)?.apply {
             setTextColor(ContextCompat.getColor(context ?: return, android.R.color.white))
             backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary)
@@ -80,7 +88,12 @@ class ButtonsFragment : Fragment() {
             setTextColor(ContextCompat.getColor(context ?: return, android.R.color.black))
             backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.secondary)
         }
+        (inactive3 as? MaterialButton)?.apply {
+            setTextColor(ContextCompat.getColor(context ?: return, android.R.color.black))
+            backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.secondary)
+        }
     }
+
 
     override fun onDetach() {
         super.onDetach()

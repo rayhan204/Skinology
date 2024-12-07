@@ -45,9 +45,11 @@ class Articel2Activity : AppCompatActivity(), ButtonsFragment.ButtonSelectionLis
             "DRY" -> "Know Dry Skin"
             "OILY" -> "Know Oily Skin"
             "NORMAL" -> "Know Normal Skin"
-            else -> "know your skin"
+            "ACNE" -> "Know Acne Skin"
+            else -> "Know Your Skin"
         }
         binding.text2.text = title
     }
+
 }
 
