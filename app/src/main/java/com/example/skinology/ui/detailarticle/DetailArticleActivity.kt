@@ -1,4 +1,4 @@
-package com.example.skinology.ui.article2
+package com.example.skinology.ui.detailarticle
 
 import android.os.Bundle
 import android.view.View
@@ -77,3 +77,4 @@ class DetailArticleActivity : AppCompatActivity() {
         }
     }
 }
+

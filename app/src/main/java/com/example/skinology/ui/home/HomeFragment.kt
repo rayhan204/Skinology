@@ -15,7 +15,7 @@ import com.example.skinology.ViewModelFactory
 import com.example.skinology.adapter.ArticleAdapter
 import com.example.skinology.data.Result
 import com.example.skinology.databinding.FragmentHomeBinding
-import com.example.skinology.ui.article2.DetailArticleActivity
+import com.example.skinology.ui.detailarticle.DetailArticleActivity
 
 class HomeFragment : Fragment() {
 

@@ -27,4 +27,7 @@ interface SkinologyDao {
 
     @Query("SELECT * FROM article WHERE id = :articleId LIMIT 1")
     suspend fun getArticleId(articleId: Int): ArticleEntity
+
+    @Query("SELECT * FROM article WHERE category = :category")
+    suspend fun getArticlesByCategoryDirect(category: String): List<ArticleEntity>
 }
