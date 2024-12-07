@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.example.skinology.data.local.entity.ArticleEntity
 import com.example.skinology.data.local.entity.HistoryEntity
 
@@ -26,7 +27,7 @@ interface SkinologyDao {
     fun getAllArticles(): LiveData<List<ArticleEntity>>
 
     @Query("SELECT * FROM article WHERE id = :articleId LIMIT 1")
-    suspend fun getArticleId(articleId: Int): ArticleEntity
+    suspend fun getArticleId(articleId: String): ArticleEntity
 
     @Query("SELECT * FROM article WHERE category = :category")
     suspend fun getArticlesByCategoryDirect(category: String): List<ArticleEntity>

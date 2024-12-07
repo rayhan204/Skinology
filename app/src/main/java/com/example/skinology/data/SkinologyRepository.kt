@@ -6,17 +6,12 @@ import androidx.lifecycle.liveData
 import com.example.skinology.data.local.room.SkinologyDao
 import com.example.skinology.data.remote.retrofit.ApiService
 import com.example.skinology.data.local.entity.ArticleEntity
-import com.example.skinology.data.remote.response.AcneItem
-import com.example.skinology.data.remote.response.DryItem
-import com.example.skinology.data.remote.response.NormalItem
-import com.example.skinology.data.remote.response.OilyItem
 import com.example.skinology.data.remote.toArticleEntity
 import kotlinx.coroutines.Dispatchers
 
 class SkinologyRepository private constructor(
     private val skinologyDao: SkinologyDao,
     private val apiService: ApiService
-
 ){
 
     fun getAllSkinTypes(): LiveData<Result<List<ArticleEntity>>> = liveData(Dispatchers.IO) {
@@ -90,52 +85,11 @@ class SkinologyRepository private constructor(
         }
     }
 
-    fun getArticleId(articleId: Int): LiveData<Result<ArticleEntity>> = liveData(Dispatchers.IO) {
+    fun getArticleId(articleId: String): LiveData<Result<ArticleEntity>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
         try {
             val article = skinologyDao.getArticleId(articleId)
             emit(Result.Success(article))
-        } catch (e: Exception) {
-            emit(Result.Error("Error: ${e.message}"))
-        }
-    }
-
-
-    fun getSkinTypeOily(): LiveData<Result<List<OilyItem>>> = liveData(Dispatchers.IO) {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getSkinTypeOily("oily")
-            emit(Result.Success(response))
-        } catch (e: Exception) {
-            emit(Result.Error("Error: ${e.message}"))
-        }
-    }
-
-    fun getSkinTypeNormal(): LiveData<Result<List<NormalItem>>> = liveData(Dispatchers.IO) {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getSkinTypeNormal("normal")
-            emit(Result.Success(response))
-        } catch (e: Exception) {
-            emit(Result.Error("Error: ${e.message}"))
-        }
-    }
-
-    fun getSkinTypeAcne(): LiveData<Result<List<AcneItem>>> = liveData(Dispatchers.IO) {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getSkinTypeAcne("acne")
-            emit(Result.Success(response))
-        } catch (e: Exception) {
-            emit(Result.Error("Error: ${e.message}"))
-        }
-    }
-
-    fun getSkinTypeDry(): LiveData<Result<List<DryItem>>> = liveData(Dispatchers.IO) {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getSkinTypeDry("dry")
-            emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error("Error: ${e.message}"))
         }

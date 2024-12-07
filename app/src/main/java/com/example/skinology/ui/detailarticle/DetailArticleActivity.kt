@@ -30,10 +30,14 @@ class DetailArticleActivity : AppCompatActivity() {
         val articleId = intent.getStringExtra("ARTICLE_ID")
         Log.d("DetailArticleActivity", "Received article ID: $articleId")
         if (articleId != null) {
-            observeViewModel(articleId.toInt())
+            observeViewModel(articleId)
         } else {
             Toast.makeText(this, "Article id tidak ditemukan", Toast.LENGTH_SHORT).show()
             finish()
+        }
+
+        if (articleId != null) {
+            viewModel.getArticleId(articleId)
         }
 
         setupToolbar()
@@ -45,24 +49,23 @@ class DetailArticleActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeViewModel(articleId: Int) {
-        viewModel.getArticleId(articleId)
-
-        viewModel.event.observe(this) { result ->
+    private fun observeViewModel(articleId: String) {
+        viewModel.getArticleId(articleId).observe(this) { result ->
             when (result) {
-                is Result.Loading -> showLoading(true)
+                is Result.Loading -> {
+                    showLoading(true)
+                }
                 is Result.Success -> {
                     showLoading(false)
-                    Log.d("DetailArticleActivity", "Article data  received: ${result.data}")
                     updateUI(result.data)
                 }
                 is Result.Error -> {
                     showLoading(false)
-                    Log.e("DetailArticleActivity", "Error: ${result.error}")
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                 }
             }
         }
+
     }
 
     private fun showLoading(isLoading: Boolean) {
