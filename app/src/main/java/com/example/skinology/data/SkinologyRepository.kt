@@ -1,6 +1,6 @@
 package com.example.skinology.data
 
-import android.util.Log
+import androidx.camera.core.CameraEffect
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.skinology.data.local.room.SkinologyDao
@@ -10,6 +10,7 @@ import com.example.skinology.data.remote.response.AcneItem
 import com.example.skinology.data.remote.response.DryItem
 import com.example.skinology.data.remote.response.NormalItem
 import com.example.skinology.data.remote.response.OilyItem
+import com.example.skinology.data.remote.toArticleEntity
 import kotlinx.coroutines.Dispatchers
 
 class SkinologyRepository private constructor(
@@ -81,7 +82,6 @@ class SkinologyRepository private constructor(
                 })
             }
 
-            Log.d("SkinologyRepository", "Inserting articles into database: $articles")
             skinologyDao.insertArticles(articles)
             emit(Result.Success(articles))
 
@@ -94,10 +94,8 @@ class SkinologyRepository private constructor(
         emit(Result.Loading)
         try {
             val article = skinologyDao.getArticleId(articleId)
-            Log.d("SkinologyRepository", "Article retrieved: $article")
             emit(Result.Success(article))
         } catch (e: Exception) {
-            Log.d("SkinologyRepository", "Error fetching article: ${e.message}")
             emit(Result.Error("Error: ${e.message}"))
         }
     }
@@ -137,6 +135,65 @@ class SkinologyRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.getSkinTypeDry("dry")
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    //berdarkan jenis di article
+    fun getSkinTypeByCategory(category: String): LiveData<Result<List<ArticleEntity>>> = liveData(Dispatchers.IO) {
+        emit(Result.Loading)
+        try {
+            val localArticles = skinologyDao.getArticlesByCategoryDirect(category)
+            if (localArticles.isNotEmpty()) {
+                emit(Result.Success(localArticles))
+            }
+
+            val response: List<ArticleEntity> = when (category) {
+                "Normal" -> apiService.getSkinTypeNormal("normal").map { normalItem ->
+                    ArticleEntity(
+                        id = normalItem.id.toString(),
+                        name = normalItem.name,
+                        photo = normalItem.photo,
+                        description = normalItem.description,
+                        category = "Normal"
+                    )
+                }
+                "Oily" -> apiService.getSkinTypeOily("oily").map { oilyItem ->
+                    ArticleEntity(
+                        id = oilyItem.id.toString(),
+                        name = oilyItem.name,
+                        photo = oilyItem.photo,
+                        description = oilyItem.description,
+                        category = "Oily"
+                    )
+                }
+                "Acne" -> apiService.getSkinTypeAcne("acne").map { acneItem ->
+                    ArticleEntity(
+                        id = acneItem.id.toString(),
+                        name = acneItem.name,
+                        photo = acneItem.photo,
+                        description = acneItem.description,
+                        category = "Acne"
+                    )
+                }
+                "Dry" -> apiService.getSkinTypeDry("dry").map { dryItem ->
+                    ArticleEntity(
+                        id = dryItem.id.toString(),
+                        name = dryItem.name,
+                        photo = dryItem.photo,
+                        description = dryItem.description,
+                        category = "Dry"
+                    )
+                }
+                else -> emptyList()
+            }
+
+            if (response.isNotEmpty()) {
+                skinologyDao.insertArticles(response)
+            }
+
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error("Error: ${e.message}"))

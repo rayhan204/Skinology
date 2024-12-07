@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.skinology.data.SkinologyRepository
 import com.example.skinology.di.Injection
-import com.example.skinology.ui.article.ArticleViewModel
-import com.example.skinology.ui.article2.DetailViewModel
+import com.example.skinology.ui.article2.Articel2Activity
+import com.example.skinology.ui.article2.ArticleViewModel
+import com.example.skinology.ui.detailarticle.DetailViewModel
 import com.example.skinology.ui.camera.CameraViewModel
 import com.example.skinology.ui.history.HistoryViewModel
 import com.example.skinology.ui.home.HomeViewModel

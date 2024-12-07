@@ -1,4 +1,4 @@
-package com.example.skinology.ui.article2
+package com.example.skinology.ui.detailarticle
 
 import android.util.Log
 import androidx.lifecycle.LiveData
