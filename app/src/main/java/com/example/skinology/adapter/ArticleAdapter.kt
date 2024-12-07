@@ -1,4 +1,62 @@
 package com.example.skinology.adapter
 
-class ArticleAdapter {
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.skinology.data.local.entity.ArticleEntity
+import com.example.skinology.databinding.ItemArticleBinding
+
+class ArticleAdapter(private val onItemClick: (ArticleEntity) -> Unit) :
+    ListAdapter<ArticleEntity, ArticleAdapter.ArticleViewHolder>(DIFF_CALLBACK) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
+        val binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ArticleViewHolder(binding, onItemClick)
+    }
+
+    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+        val article = getItem(position)
+        holder.bind(article)
+    }
+
+    override fun submitList(list: MutableList<ArticleEntity>?) {
+        super.submitList(list)
+    }
+
+    class ArticleViewHolder(
+        private val binding: ItemArticleBinding,
+        private val onItemClick: (ArticleEntity) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(article: ArticleEntity) {
+            // Set article name and description
+            binding.nameArticle.text = article.name
+            binding.articleDesc.text = article.description
+
+            // Load the image using Glide
+            Glide.with(binding.imageView.context)
+                .load(article.photo)
+                .into(binding.imageView)
+
+            // Set onClick listener for the item
+            binding.root.setOnClickListener {
+                onItemClick(article)
+            }
+        }
+    }
+
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticleEntity>() {
+            override fun areItemsTheSame(oldItem: ArticleEntity, newItem: ArticleEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: ArticleEntity, newItem: ArticleEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

@@ -28,6 +28,9 @@
             android:name=".ui.result.ResultActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.article2.DetailArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

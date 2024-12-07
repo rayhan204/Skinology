@@ -3,15 +3,9 @@ package com.example.skinology.ui.camera
 import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.skinology.data.SkinologyRepository
 
-class CameraViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
+class CameraViewModel(private val repository: SkinologyRepository) : ViewModel() {
 
-    companion object {
-        private const val IMAGE_URI_KEY = "IMAGE_URI_KEY"
-    }
-    var currentImageUri: Uri?
-        get() = savedStateHandle[IMAGE_URI_KEY]
-        set(value) {
-            savedStateHandle[IMAGE_URI_KEY] = value
-        }
+   var currentImageUri: Uri? = null
 }
