@@ -1,6 +1,7 @@
 package com.example.skinology.ui.article2
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +28,7 @@ class DetailArticleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val articleId = intent.getStringExtra("ARTICLE_ID")
+        Log.d("DetailArticleActivity", "Received article ID: $articleId")
         if (articleId != null) {
             observeViewModel(articleId.toInt())
         } else {
@@ -51,10 +53,12 @@ class DetailArticleActivity : AppCompatActivity() {
                 is Result.Loading -> showLoading(true)
                 is Result.Success -> {
                     showLoading(false)
+                    Log.d("DetailArticleActivity", "Article data  received: ${result.data}")
                     updateUI(result.data)
                 }
                 is Result.Error -> {
                     showLoading(false)
+                    Log.e("DetailArticleActivity", "Error: ${result.error}")
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                 }
             }

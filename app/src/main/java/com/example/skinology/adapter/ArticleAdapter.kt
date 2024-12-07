@@ -32,16 +32,13 @@ class ArticleAdapter(private val onItemClick: (ArticleEntity) -> Unit) :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: ArticleEntity) {
-            // Set article name and description
             binding.nameArticle.text = article.name
             binding.articleDesc.text = article.description
 
-            // Load the image using Glide
             Glide.with(binding.imageView.context)
                 .load(article.photo)
                 .into(binding.imageView)
 
-            // Set onClick listener for the item
             binding.root.setOnClickListener {
                 onItemClick(article)
             }

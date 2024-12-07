@@ -1,5 +1,6 @@
 package com.example.skinology.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.skinology.data.local.room.SkinologyDao
@@ -20,21 +21,16 @@ class SkinologyRepository private constructor(
     fun getAllSkinTypes(): LiveData<Result<List<ArticleEntity>>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
         try {
-            // Mengecek data lokal terlebih dahulu
             val localArticles = skinologyDao.getAllArticles()  // This returns LiveData<List<ArticleEntity>>
 
-            // Observe LiveData (blocking call in this context)
             val localData = localArticles.value // Access the data directly (works because we are emitting this result in liveData builder)
 
-            // Emit data from local database if available
             if (!localData.isNullOrEmpty()) {
                 emit(Result.Success(localData))
             }
 
-            // Mengambil data dari API
             val response = apiService.getAllSkinTypes()
 
-            // Menggabungkan semua data jenis kulit menjadi satu daftar artikel
             val articles = mutableListOf<ArticleEntity>()
 
             response.normal.let { normalItems ->
@@ -85,10 +81,8 @@ class SkinologyRepository private constructor(
                 })
             }
 
-            // Menyimpan data artikel ke dalam database lokal
+            Log.d("SkinologyRepository", "Inserting articles into database: $articles")
             skinologyDao.insertArticles(articles)
-
-            // Mengirimkan hasilnya
             emit(Result.Success(articles))
 
         } catch (e: Exception) {
@@ -100,12 +94,13 @@ class SkinologyRepository private constructor(
         emit(Result.Loading)
         try {
             val article = skinologyDao.getArticleId(articleId)
+            Log.d("SkinologyRepository", "Article retrieved: $article")
             emit(Result.Success(article))
         } catch (e: Exception) {
-            emit(Result.Error(e.message ?: "An error occurred"))
+            Log.d("SkinologyRepository", "Error fetching article: ${e.message}")
+            emit(Result.Error("Error: ${e.message}"))
         }
     }
-
 
 
     fun getSkinTypeOily(): LiveData<Result<List<OilyItem>>> = liveData(Dispatchers.IO) {
