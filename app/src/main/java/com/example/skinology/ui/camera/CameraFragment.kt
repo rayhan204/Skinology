@@ -17,17 +17,19 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.skinology.databinding.FragmentCameraBinding
 import com.example.skinology.helper.ImageClassifierHelper
 import com.example.skinology.ui.cameraX.CameraX
 import com.example.skinology.ui.result.ResultActivity
 import com.yalantis.ucrop.UCrop
 import com.example.skinology.ViewModelFactory
+import kotlinx.coroutines.launch
 import org.tensorflow.lite.task.vision.classifier.Classifications
 import java.io.File
 import java.text.NumberFormat
 
-class CameraFragment : Fragment() {
+/*class CameraFragment : Fragment() {
 
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
@@ -200,4 +202,134 @@ class CameraFragment : Fragment() {
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
+}*/
+
+//ini codingan versi cintia
+class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
+
+    private var _binding: FragmentCameraBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var imageClassifierHelper: ImageClassifierHelper
+    private val categoryMap = listOf("berjerawat", "normal", "kering", "berminyak")
+    private var currentImageUri: Uri? = null
+    private var classificationResult: String? = null
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        uri?.let {
+            currentImageUri = it
+            startCrop(it)
+        } ?: Log.d("Photo Picker", "No media selected")
+    }
+
+    private val cropActivityResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                val data = result.data
+                val croppedUri = UCrop.getOutput(data!!)
+                if (croppedUri != null) {
+                    currentImageUri = croppedUri
+                    binding.previewImageView.setImageURI(croppedUri)
+                } else {
+                    showToast("Crop failed: No URI found")
+                }
+            } else if (result.resultCode == UCrop.RESULT_ERROR) {
+                val cropError = UCrop.getError(result.data!!)
+                showToast("Crop error: ${cropError?.message}")
+            }
+        }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCameraBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        imageClassifierHelper = ImageClassifierHelper(requireContext(), this)
+
+        binding.buttonImg.setOnClickListener { startGallery() }
+        binding.buttonAnalyze.setOnClickListener { analyzeImage() }
+        binding.buttonCamera.setOnClickListener { startCameraX() }
+    }
+
+    private fun startGallery() {
+        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private fun startCrop(uri: Uri) {
+        val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "cropped_image_${System.currentTimeMillis()}.jpg"))
+        UCrop.of(uri, destinationUri)
+            .withAspectRatio(1f, 1f)
+            .withMaxResultSize(450, 450)
+            .getIntent(requireActivity())
+            .let { cropActivityResultLauncher.launch(it) }
+    }
+
+    private fun analyzeImage() {
+        currentImageUri?.let { uri ->
+            lifecycleScope.launch {
+                imageClassifierHelper.classifyStaticImage(uri)
+            }
+        } ?: showToast("No image selected")
+    }
+
+    private fun startCameraX() {
+        val intent = Intent(requireContext(), CameraX::class.java)
+        launcherIntentCameraX.launch(intent)
+    }
+
+    private val launcherIntentCameraX = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == CameraX.CAMERAX_RESULT) {
+            val imageUri = it.data?.getStringExtra(CameraX.EXTRA_CAMERAX_IMAGE)?.toUri()
+            if (imageUri != null) {
+                startCrop(imageUri)
+            }
+        }
+    }
+
+    private fun moveToResult() {
+        val intent = Intent(requireContext(), ResultActivity::class.java).apply {
+            putExtra(ResultActivity.EXTRA_IMAGE_URI, currentImageUri.toString())
+            putExtra(ResultActivity.EXTRA_RESULT, classificationResult)
+        }
+        startActivity(intent)
+    }
+
+    override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
+        results?.firstOrNull()?.categories?.let { categories ->
+            val topCategory = categories.maxByOrNull { it.score }
+            if (topCategory != null) {
+                val label = categoryMap.getOrNull(topCategory.index) ?: "Unknown"
+                classificationResult = "$label: ${(topCategory.score * 100).toInt()}%"
+            } else {
+                classificationResult = "No result"
+            }
+        } ?: run {
+            classificationResult = "No result"
+        }
+        moveToResult()
+    }
+
+    override fun onError(error: String) {
+        showToast("Error: $error")
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
+
+

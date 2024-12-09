@@ -6,7 +6,6 @@ import androidx.lifecycle.liveData
 import com.example.skinology.data.local.room.SkinologyDao
 import com.example.skinology.data.remote.retrofit.ApiService
 import com.example.skinology.data.local.entity.ArticleEntity
-import com.example.skinology.data.remote.toArticleEntity
 import kotlinx.coroutines.Dispatchers
 
 class SkinologyRepository private constructor(
@@ -153,6 +152,7 @@ class SkinologyRepository private constructor(
             emit(Result.Error("Error: ${e.message}"))
         }
     }
+
 
     companion object {
         @Volatile
