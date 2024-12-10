@@ -28,6 +28,9 @@
             android:name=".ui.result.ResultActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.detailarticle.DetailArticleActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
@@ -49,6 +52,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
+
+        <activity android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
     </application>
 

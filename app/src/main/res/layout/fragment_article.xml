@@ -67,8 +67,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:paddingStart="50dp"
         android:orientation="horizontal"
+        android:gravity="center"
         android:padding="8dp"
         app:layout_constraintTop_toBottomOf="@id/text_2"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:layout_marginEnd="50dp"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/secondary"
             android:gravity="center"
@@ -106,16 +107,47 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/secondary"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/text_oily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/oily_skin"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_oily"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/oily"
+                app:backgroundTint="@null"
+                app:cornerRadius="15dp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/buttonContainer2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingEnd="50dp"
-        android:gravity="end"
         android:orientation="horizontal"
         android:padding="8dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/buttonContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,18 +164,18 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_oily"
+                android:id="@+id/text_acne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_marginBottom="8dp"
                 android:textColor="@color/primary"
                 android:textStyle="bold"
-                android:text="@string/oily_skin"
+                android:text="@string/acne_skin"
                 android:textSize="20sp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_oily"
+                android:id="@+id/button_acne"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -153,27 +185,14 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/buttonContainer3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:paddingStart="50dp"
-        app:layout_constraintTop_toBottomOf="@id/buttonContainer2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="RtlSymmetry">
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/secondary"
-            android:gravity="center"
+            android:gravity="end"
+            android:layout_marginStart="50dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/text_normal"
@@ -198,5 +217,6 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

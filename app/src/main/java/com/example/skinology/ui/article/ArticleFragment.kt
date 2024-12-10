@@ -46,7 +46,13 @@ class ArticleFragment : Fragment() {
         binding.buttonNormal.setOnClickListener {
             navigateToArticle2Activity("NORMAL")
         }
+
+        // Add button for Acne
+        binding.buttonAcne.setOnClickListener {
+            navigateToArticle2Activity("ACNE")
+        }
     }
+
 
     private fun navigateToArticle2Activity(selectedButton: String) {
         Log.d("ArticleFragment", "Navigating with button: $selectedButton")
