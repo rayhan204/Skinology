@@ -1,50 +1,30 @@
 package com.example.skinology.ui.result
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.example.skinology.R
+import com.example.skinology.ViewModelFactory
 import com.example.skinology.data.local.entity.HistoryEntity
-import com.example.skinology.data.local.room.SkinologyDatabase
 import com.example.skinology.databinding.ActivityResultBinding
-import com.example.skinology.helper.ImageClassifierHelper
 import com.example.skinology.ui.camera.CameraFragment
-import com.example.skinology.ui.cameraX.CameraX
-import com.example.skinology.ui.history.HistoryFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-/*class ResultActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityResultBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityResultBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val results = intent.getStringExtra("RESULT")
-        val imageUri = intent.getStringExtra("IMAGE_URI")
-
-        imageUri?.let {
-            binding.imageView.setImageURI(Uri.parse(it))
-        }
-
-        results?.let { displayResults(it) }
-    }
-
-    private fun displayResults(results: String) {
-        binding.descOnboarding.text = results
-    }
-}*/
 
 //ini codingan versi cintia
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
     private var imageUri: Uri? = null
     private var classificationResult: String? = null
+    private val resultViewModel: ResultViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +50,21 @@ class ResultActivity : AppCompatActivity() {
         binding.buttonCamera.setOnClickListener {
             navigateToCameraFragment()
         }
+
+        val dateFormatter = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        val formattedDate = dateFormatter.format(System.currentTimeMillis())
+
+        binding.btnSave.setOnClickListener{
+            val historyEntity = HistoryEntity(
+                id = System.currentTimeMillis().toString(),
+                prediction = classificationResult ?: "No Result",
+                date = formattedDate,
+                image = imageUri.toString()
+            )
+            resultViewModel.insertHistory(historyEntity)
+            Toast.makeText(this, "history disimpan", Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
     private fun navigateToCameraFragment() {
         val intent = Intent(this, CameraFragment::class.java).apply {
@@ -87,6 +82,7 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun displayResults() {
         if (!classificationResult.isNullOrEmpty()) {
             binding.descOnboarding.text = classificationResult

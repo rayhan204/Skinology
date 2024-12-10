@@ -2,16 +2,44 @@ package com.example.skinology.data
 
 import androidx.camera.core.CameraEffect
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.flow.map
 import androidx.lifecycle.liveData
 import com.example.skinology.data.local.room.SkinologyDao
 import com.example.skinology.data.remote.retrofit.ApiService
 import com.example.skinology.data.local.entity.ArticleEntity
+import com.example.skinology.data.local.entity.HistoryEntity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class SkinologyRepository private constructor(
     private val skinologyDao: SkinologyDao,
     private val apiService: ApiService
 ){
+
+    suspend fun insertHistory(historyEntity: HistoryEntity) {
+        val history = HistoryEntity(
+            id = historyEntity.id,
+            prediction = historyEntity.prediction,
+            image = historyEntity.image,
+            date = historyEntity.date
+        )
+        skinologyDao.insertHistory(history)
+    }
+
+    fun getAllHistory(): LiveData<Result<List<HistoryEntity>>> {
+        return skinologyDao.getAllHistory()
+            .map { history ->
+                Result.Success(history)
+            }
+            .asLiveData()
+    }
+
+    suspend fun deleteHistoryById(id: String) {
+        withContext(Dispatchers.IO) {
+            skinologyDao.deleteHistory(id)
+        }
+    }
 
     fun getAllSkinTypes(): LiveData<Result<List<ArticleEntity>>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
