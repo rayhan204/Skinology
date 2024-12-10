@@ -27,7 +27,7 @@ import java.io.File
 
 //ini codingan versi cintia
 
-class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
+/*class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
 
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
@@ -161,5 +161,134 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
         super.onDestroyView()
         _binding = null
     }
-}
+}*/
 
+class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
+
+    private var _binding: FragmentCameraBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var imageClassifierHelper: ImageClassifierHelper
+    private var classificationResult: String? = null
+    private val cameraViewModel: CameraViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        uri?.let {
+            cameraViewModel.currentImageUri = it
+            startCrop(it)
+        } ?: Log.d("Photo Picker", "No media selected")
+    }
+
+    private val cropActivityResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                val data = result.data
+                val croppedUri = UCrop.getOutput(data!!)
+                if (croppedUri != null) {
+                    cameraViewModel.currentImageUri = croppedUri
+                    binding.previewImageView.setImageURI(croppedUri)
+                } else {
+                    showToast("Crop failed: No URI found")
+                }
+            } else if (result.resultCode == UCrop.RESULT_ERROR) {
+                val cropError = UCrop.getError(result.data!!)
+                showToast("Crop error: ${cropError?.message}")
+            }
+        }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCameraBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        imageClassifierHelper = ImageClassifierHelper(requireContext(), this)
+
+        cameraViewModel.currentImageUri?.let {
+            binding.previewImageView.setImageURI(it)
+        }
+        binding.buttonImg.setOnClickListener { startGallery() }
+        binding.buttonAnalyze.setOnClickListener { analyzeImage() }
+        binding.buttonCamera.setOnClickListener { startCameraX() }
+    }
+
+    private fun startGallery() {
+        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private fun startCrop(uri: Uri) {
+        val destinationUri = Uri.fromFile(File(requireContext().cacheDir, "cropped_image_${System.currentTimeMillis()}.jpg"))
+        UCrop.of(uri, destinationUri)
+            .withAspectRatio(1f, 1f)
+            .withMaxResultSize(450, 450)
+            .getIntent(requireActivity())
+            .let { cropActivityResultLauncher.launch(it) }
+    }
+
+    private fun analyzeImage() {
+        cameraViewModel.currentImageUri?.let { uri ->
+            lifecycleScope.launch {
+                imageClassifierHelper.classifyStaticImage(uri)
+            }
+        } ?: showToast("No image selected")
+    }
+
+    private fun startCameraX() {
+        val intent = Intent(requireContext(), CameraX::class.java)
+        launcherIntentCameraX.launch(intent)
+    }
+
+    private val launcherIntentCameraX = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == CameraX.CAMERAX_RESULT) {
+            val imageUri = it.data?.getStringExtra(CameraX.EXTRA_CAMERAX_IMAGE)?.toUri()
+            if (imageUri != null) {
+                startCrop(imageUri)
+            }
+        }
+    }
+
+    private fun moveToResult() {
+        val intent = Intent(requireContext(), ResultActivity::class.java).apply {
+            putExtra(ResultActivity.EXTRA_IMAGE_URI, cameraViewModel.currentImageUri.toString())
+            putExtra(ResultActivity.EXTRA_RESULT, classificationResult)
+        }
+        startActivity(intent)
+    }
+
+    override fun onResults(results: List<ImageClassifierHelper.ClassificationResult>, inferenceTime: Long) {
+        if (results.isNotEmpty()) {
+            val topResult = results.maxByOrNull { it.confidence }
+            topResult?.let {
+                classificationResult = "${it.label}: ${(it.confidence * 100).toInt()}%"
+                Log.d("Classification", "Top Label: ${it.label}, Score: ${(it.confidence * 100).toInt()}%")
+            }
+        } else {
+            classificationResult = "No result"
+        }
+
+        moveToResult()
+    }
+
+    override fun onError(error: String) {
+        showToast("Error: $error")
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
