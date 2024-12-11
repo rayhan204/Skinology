@@ -76,9 +76,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="24dp"
                         android:text="@string/version_1_0_0"
                         android:textAlignment="center"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <TextView
@@ -89,6 +91,7 @@
                         android:text="@string/app_description"
                         android:textAlignment="center"
                         android:textSize="20sp"
+                        android:textColor="@color/black"
                         android:justificationMode="inter_word" />
 
                 </LinearLayout>

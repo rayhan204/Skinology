@@ -1,6 +1,5 @@
 package com.example.skinology.ui.history
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import com.example.skinology.data.Result
 import com.example.skinology.databinding.FragmentHistoryBinding
 import com.example.skinology.ViewModelFactory
 import com.example.skinology.adapter.HistoryAdapter
-import com.example.skinology.ui.result.ResultActivity
 
 class HistoryFragment : Fragment() {
 
@@ -43,13 +41,7 @@ class HistoryFragment : Fragment() {
     private fun setupRecyclerView() {
         adapter = HistoryAdapter(
             onItemClick = { history ->
-                val intent = Intent(requireContext(), ResultActivity::class.java).apply {
-                    putExtra("HISTORY_ID", history.id)
-                }
-                startActivity(intent)
-            },
-            onDeleteClick = { history ->
-                viewModel.deleteHistoryById(history.id) // Memanggil fungsi untuk menghapus item
+                viewModel.deleteHistoryById(history.id)
                 Toast.makeText(requireContext(), ("history dihapus"), Toast.LENGTH_SHORT).show()
             }
         )

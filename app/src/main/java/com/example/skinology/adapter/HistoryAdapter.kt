@@ -10,13 +10,12 @@ import com.example.skinology.data.local.entity.HistoryEntity
 import com.example.skinology.databinding.ItemHistoryBinding
 
 class HistoryAdapter(
-    private val onItemClick: (HistoryEntity) -> Unit,
-    private val onDeleteClick: (HistoryEntity) -> Unit
+    private val onItemClick: (HistoryEntity) -> Unit
 ) : ListAdapter<HistoryEntity, HistoryAdapter.HistoryViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val binding = ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HistoryViewHolder(binding, onItemClick, onDeleteClick)
+        return HistoryViewHolder(binding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
@@ -27,7 +26,6 @@ class HistoryAdapter(
     class HistoryViewHolder(
         private val binding: ItemHistoryBinding,
         private val onItemClick: (HistoryEntity) -> Unit,
-        private val onDeleteClick: (HistoryEntity) -> Unit // Callback untuk delete
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(history: HistoryEntity) {
@@ -42,7 +40,7 @@ class HistoryAdapter(
             }
 
             binding.tvDelete.setOnClickListener {
-                onDeleteClick(history)
+                onItemClick(history)
             }
         }
     }
