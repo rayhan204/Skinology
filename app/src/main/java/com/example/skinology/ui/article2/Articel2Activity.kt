@@ -98,11 +98,11 @@ class Articel2Activity : AppCompatActivity(), ButtonsFragment.ButtonSelectionLis
 
     private fun updateTitle(selectedButton: String?) {
         val title = when {
-            selectedButton.equals("DRY", ignoreCase = true) -> "Know Dry Skin"
-            selectedButton.equals("OILY", ignoreCase = true) -> "Know Oily Skin"
-            selectedButton.equals("NORMAL", ignoreCase = true) -> "Know Normal Skin"
-            selectedButton.equals("ACNE", ignoreCase = true) -> "Know Acne Skin"
-            else -> "Know Your Skin"
+            selectedButton.equals("DRY", ignoreCase = true) -> "Mengenal Kulit Kering"
+            selectedButton.equals("OILY", ignoreCase = true) -> "Mengenal Kulit Berminyak"
+            selectedButton.equals("NORMAL", ignoreCase = true) -> "Mengenal Kulit Normal"
+            selectedButton.equals("ACNE", ignoreCase = true) -> "Mengenal Kulit Berjerawat"
+            else -> "Mengenal Kulit Anda"
         }
         binding.text2.text = title
         Log.d("Articel2Activity", "Title updated to: $title for selectedButton: $selectedButton")

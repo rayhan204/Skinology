@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:title="Scan Your Skin"
+        app:title="Pindai Wajah Anda"
         app:titleTextAppearance="@style/ToolbarTitle"
         app:titleCentered="true" />
 
