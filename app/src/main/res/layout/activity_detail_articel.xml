@@ -43,6 +43,7 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="italic"
+        android:transitionName="text1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,78 +58,11 @@
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold"
+        android:transitionName="text2"
         app:layout_constraintTop_toBottomOf="@id/text_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <!--<LinearLayout
-        android:id="@+id/buttonContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/text_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_dry"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="125dp"
-                android:layout_height="50dp"
-                app:cornerRadius="15dp"
-                android:text="Dry Skin"
-                android:textSize="12dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_oily"
-                style="@style/Widget.MaterialComponents.Button"
-                android:backgroundTint="@color/secondary"
-                android:layout_width="125dp"
-                android:layout_height="50dp"
-                app:cornerRadius="15dp"
-                android:text="Oily Skin"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_normal"
-                style="@style/Widget.MaterialComponents.Button"
-                android:backgroundTint="@color/secondary"
-                android:layout_width="125dp"
-                android:layout_height="50dp"
-                app:cornerRadius="15dp"
-                android:text="Normal Skin"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
-        </LinearLayout>
-
-    </LinearLayout> -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -154,6 +88,7 @@
                 android:background="@drawable/rounded_button"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
+                android:transitionName="profile"
                 android:src="@drawable/item_history" />
 
             <TextView
@@ -191,6 +126,7 @@
             android:layout_margin="16dp"
             android:text="Dry skin is a common condition characterized by a lack of moisture in the outermost layer of the skin. It can cause discomfort, itching, and flaky patches. To prevent and treat dry skin, it's important to understand its causes and use the right skincare products..."
             android:textColor="@color/black"
+            android:transitionName="description"
             android:textSize="14sp" />
     </ScrollView>
 
