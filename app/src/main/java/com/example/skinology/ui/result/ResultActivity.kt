@@ -71,7 +71,6 @@ class ResultActivity : AppCompatActivity() {
             putExtra("FRAGMENT", "CameraFragment")
         }
         startActivity(intent)
-        finish() // Tutup ResultActivity
     }
 
     private fun displayImage() {
