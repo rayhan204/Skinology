@@ -17,18 +17,24 @@
 Link: [Download](https://drive.google.com/file/d/1KvWXFyeRwZDlOGOM7o1ewIrz8I5JX-Zf/view?usp=sharing)
 
 ## Demo Project
+![Demo](https://github.com/rayhan204/Skinology/blob/main/demo_android.gif)
 
 ## Built With
 1. Cloud Computing
-   - First nested list item
-   - 
-3. Mobile Development
+   - Google Cloud Platform
+   - Visual Studio Code
+   - Cloud Run
+   - Cloud Storage
+   - Cloud IAM
+   - Docker
+   - Postman
+2. Mobile Development
    - Figma
    - Android Studio
    - Kotlin
    - Camera X
    - Retrofit
-5. Machine Learning
+3. Machine Learning
    - Tensorflow
    - Keras
    - Matplotlib
