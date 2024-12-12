@@ -10,11 +10,11 @@
   | Rayhan                           | A263B4KY3707      | Mobile Development   | Universitas Muhammadiyah Purwokerto         | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rayhan-ray-022933244/)                 
 
 ## Skinology
-![Skinology](https://Skinology.com/assets/images/Logo_Skinology.jpeg)
-*Skinology* is an Android-based application that leverages machine learning and cloud computing to identify skin types in real-time. This project aims to address the lack of understanding about skin types, which often leads to improper skincare product usage. Using a CNN model through transfer learning, the application analyzes users' skin images and provides scientific articles related to suitable skincare treatments. Developed by a multidisciplinary team, Skinology offers a data-driven solution for skin education, equipped with user-friendly UI/UX and efficient cloud infrastructure, enabling accurate and accessible information to support better skin health.
+![Skinology](https://github.com/rayhan204/Skinology/blob/main/Logo_Skinology.jpeg)
+<p align="justify"> Skinology is an Android-based application that leverages machine learning and cloud computing to identify skin types in real-time. This project aims to address the lack of understanding about skin types, which often leads to improper skincare product usage. Using a CNN model through transfer learning, the application analyzes users' skin images and provides scientific articles related to suitable skincare treatments. Developed by a multidisciplinary team, Skinology offers a data-driven solution for skin education, equipped with user-friendly UI/UX and efficient cloud infrastructure, enabling accurate and accessible information to support better skin health.</p>
 
 ## Skinology App Download
-Link: 
+Link: [Download](https://drive.google.com/file/d/1KvWXFyeRwZDlOGOM7o1ewIrz8I5JX-Zf/view?usp=sharing)
 
 ## Demo Project
 
@@ -38,7 +38,8 @@ Link:
    - Camera
    - Internet Connection
 2. Installation:
-   - Download .apk file:
+   - Download the .apk file: [Download](https://drive.google.com/file/d/1KvWXFyeRwZDlOGOM7o1ewIrz8I5JX-Zf/view?usp=sharing)
+   - Install the app
    
 ## Skinology App Features
 1. Real-Time Skin Type Detection
@@ -60,3 +61,6 @@ Link:
    - Experience reliable and consistent app performance.
      
 ## Repository Branches
+1. [Cloud Computing](https://github.com/rayhan204/Skinology/tree/Cloud-Computing)
+2. [Mobile Development](https://github.com/rayhan204/Skinology/tree/Mobile-Development)
+3. [Machine Learning](https://github.com/rayhan204/Skinology/tree/Machine-Learning)
