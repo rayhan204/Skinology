@@ -10,3 +10,53 @@
   | Rayhan                           | A263B4KY3707      | Mobile Development   | Universitas Muhammadiyah Purwokerto         | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rayhan-ray-022933244/)                 
 
 ## Skinology
+/assets/images/Logo_Skinology.png
+*Skinology* is an Android-based application that leverages machine learning and cloud computing to identify skin types in real-time. This project aims to address the lack of understanding about skin types, which often leads to improper skincare product usage. Using a CNN model through transfer learning, the application analyzes users' skin images and provides scientific articles related to suitable skincare treatments. Developed by a multidisciplinary team, Skinology offers a data-driven solution for skin education, equipped with user-friendly UI/UX and efficient cloud infrastructure, enabling accurate and accessible information to support better skin health.
+
+## Skinology App Download
+Link: 
+
+## Demo Project
+
+## Built With
+1. Cloud Computing
+   - First nested list item
+   - 
+3. Mobile Development
+   - Figma
+   - Android Studio
+   - Kotlin
+   - Camera X
+   - Retrofit
+5. Machine Learning
+   - First nested list item
+   - 
+
+## Getting Started
+1. Prerequisites:
+   - Android
+   - Camera
+   - Internet Connection
+2. Installation:
+   Download .apk file:
+   
+## Skinology App Features
+1. Real-Time Skin Type Detection
+   - Utilize your phone’s camera to analyze and determine skin types accurately.
+   - Leverage machine learning models for fast and reliable results.
+2. Scientific Articles for Skincare Education
+   - Access research-based articles tailored to your skin type (oily, dry, acne-prone, normal).
+   - Learn about effective ingredients and their benefits for specific skin concerns.
+3. User History and Offline Access
+   - Save analysis results and related articles for future reference.
+   - Access previously saved data even when offline.
+4. User-Friendly UI/UX
+   - Navigate the app easily with an intuitive interface designed using Figma.
+   - Enjoy a seamless experience with a clean and organized layout.
+5. CameraX Integration
+   - Capture high-quality images in real-time using optimized camera functionality.
+6. Scalable and Efficient Infrastructure
+   - Benefit from low-latency API responses supported by Google Cloud services.
+   - Experience reliable and consistent app performance.
+     
+## Repository Branches
