@@ -41,8 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="To Know More About Your Skin Type
-"
+        android:text="@string/to_know_more_about_your_skin_type"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold|italic"

@@ -86,14 +86,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_dry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_marginBottom="8dp"
                 android:textColor="@color/primary"
                 android:textStyle="bold"
-                android:text="Kering"
+                android:text="@string/kering"
                 android:textSize="20sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -118,11 +117,10 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/text_oily"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="@string/oily_skin"
+                android:text="@string/berminyak"
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="20sp"
@@ -142,7 +140,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/buttonContainer2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -164,14 +161,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_acne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_marginBottom="8dp"
                 android:textColor="@color/primary"
                 android:textStyle="bold"
-                android:text="@string/acne_skin"
+                android:text="@string/jerawat"
                 android:textSize="20sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -196,11 +192,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Normal"
+                android:text="@string/normal"
                 android:textAlignment="center"
                 android:textColor="@color/primary"
                 android:textSize="20sp"

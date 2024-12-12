@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skinology.R
@@ -71,7 +70,7 @@ class Articel2Activity : AppCompatActivity(), ButtonsFragment.ButtonSelectionLis
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     val articles = result.data
-                    if (articles.isNullOrEmpty()) {
+                    if (articles.isEmpty()) {
                         Toast.makeText(this, "No articles found for $category", Toast.LENGTH_SHORT).show()
                     } else {
                         articleAdapter.submitList(articles.toMutableList())
@@ -88,10 +87,9 @@ class Articel2Activity : AppCompatActivity(), ButtonsFragment.ButtonSelectionLis
 
 
     override fun onButtonSelected(buttonType: String) {
-        // Tangani tombol yang dipilih
         updateTitle(buttonType)
         Toast.makeText(this, "Selected: $buttonType", Toast.LENGTH_SHORT).show()
-        observeViewModel(buttonType) // Contoh fungsi untuk memperbarui data
+        observeViewModel(buttonType)
     }
 
 

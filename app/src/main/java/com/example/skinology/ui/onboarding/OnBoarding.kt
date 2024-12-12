@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.skinology.MainActivity
-import com.example.skinology.R
 import com.example.skinology.databinding.ActivityOnBoardingBinding
 
 class OnBoarding : AppCompatActivity() {

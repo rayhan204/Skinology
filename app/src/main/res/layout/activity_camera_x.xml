@@ -22,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Title Text -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +29,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/toolbarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/skin_detection"
@@ -39,19 +37,16 @@
                 android:textStyle="bold"
                 android:textColor="@color/black" />
 
-            <!-- Subtitle Text -->
             <TextView
-                android:id="@+id/toolbarSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_gravity="center"
-                android:text="Fotokan wajah Anda"
+                android:text="@string/take_picture"
                 android:textSize="14sp"
                 android:textColor="@color/black" />
         </LinearLayout>
 
-        <!-- Close Button -->
         <ImageView
             android:id="@+id/btnClose"
             android:layout_width="40dp"
@@ -64,11 +59,7 @@
 
     </com.google.android.material.appbar.MaterialToolbar>
 
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:background="@drawable/bottom_nav_background"
@@ -97,6 +88,5 @@
             app:srcCompat="@drawable/ic_switch_camera" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

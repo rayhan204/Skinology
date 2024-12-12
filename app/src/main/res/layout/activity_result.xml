@@ -80,7 +80,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:padding="16dp"
-        android:text="@string/camera"
+        android:text="@string/title_camera"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

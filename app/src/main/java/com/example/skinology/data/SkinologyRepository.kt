@@ -1,6 +1,5 @@
 package com.example.skinology.data
 
-import androidx.camera.core.CameraEffect
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.map
