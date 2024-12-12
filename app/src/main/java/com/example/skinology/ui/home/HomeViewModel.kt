@@ -7,7 +7,7 @@ import com.example.skinology.data.Result
 import com.example.skinology.data.SkinologyRepository
 import com.example.skinology.data.local.entity.ArticleEntity
 
-class HomeViewModel(private val repository: SkinologyRepository) : ViewModel() {
+class HomeViewModel(repository: SkinologyRepository) : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"

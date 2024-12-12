@@ -33,9 +33,4 @@ interface ApiService {
         @Path("type") skinType: String
     ): List<DryItem>
 
-    @GET("skinTypes/{type}/{id}")
-    suspend fun getDetail(
-        @Path("type") type: String,
-        @Path("id") id: Int
-    ): ArticleResponse
 }
