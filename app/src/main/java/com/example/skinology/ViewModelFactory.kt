@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.skinology.data.SkinologyRepository
 import com.example.skinology.di.Injection
-import com.example.skinology.ui.article2.Articel2Activity
 import com.example.skinology.ui.article2.ArticleViewModel
 import com.example.skinology.ui.detailarticle.DetailViewModel
 import com.example.skinology.ui.camera.CameraViewModel
@@ -25,7 +24,7 @@ class ViewModelFactory (private val repository: SkinologyRepository): ViewModelP
                 ArticleViewModel(repository) as T
             }
             modelClass.isAssignableFrom(CameraViewModel::class.java) -> {
-                CameraViewModel(repository) as T
+                CameraViewModel() as T
             }
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 HistoryViewModel(repository) as T

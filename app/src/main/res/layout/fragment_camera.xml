@@ -87,12 +87,11 @@
                 app:iconSize="32dp" />
 
             <TextView
-                android:id="@+id/text_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="@string/camera"
+                android:text="@string/title_camera"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -114,7 +113,6 @@
                 app:iconSize="32dp" />
 
             <TextView
-                android:id="@+id/text_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

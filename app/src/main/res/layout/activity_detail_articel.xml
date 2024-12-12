@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Waktunya"
+        android:text="@string/this_time"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="italic"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Mengenal Kulit Anda"
+        android:text="@string/mengenal_kulit_anda"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Understanding Dry Skin"
+                android:text="@string/understanding_dry_skin"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -121,7 +121,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="Dry skin is a common condition characterized by a lack of moisture in the outermost layer of the skin. It can cause discomfort, itching, and flaky patches. To prevent and treat dry skin, it's important to understand its causes and use the right skincare products..."
+            android:text="@string/des_skin"
             android:textColor="@color/black"
             android:textSize="14sp" />
     </ScrollView>

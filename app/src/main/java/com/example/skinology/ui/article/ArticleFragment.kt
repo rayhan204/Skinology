@@ -6,13 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.skinology.databinding.FragmentArticleBinding
-import com.example.skinology.databinding.FragmentCameraBinding
 import com.example.skinology.ui.article2.Articel2Activity
-import com.example.skinology.ui.cameraX.CameraX
 
 class ArticleFragment : Fragment() {
 
@@ -47,7 +43,6 @@ class ArticleFragment : Fragment() {
             navigateToArticle2Activity("NORMAL")
         }
 
-        // Add button for Acne
         binding.buttonAcne.setOnClickListener {
             navigateToArticle2Activity("ACNE")
         }

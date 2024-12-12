@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import com.example.skinology.data.local.entity.ArticleEntity
 import com.example.skinology.data.local.entity.HistoryEntity
 import kotlinx.coroutines.flow.Flow

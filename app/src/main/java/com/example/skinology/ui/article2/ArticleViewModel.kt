@@ -14,8 +14,6 @@ class ArticleViewModel(private val repository: SkinologyRepository) : ViewModel(
     }
     val text: LiveData<String> = _text
 
-    val getAllSkinTypes : LiveData<Result<List<ArticleEntity>>> = repository.getAllSkinTypes()
-
     fun getArticlesByCategory(category: String): LiveData<Result<List<ArticleEntity>>> {
         return repository.getSkinTypeByCategory(category)
     }
