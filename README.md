@@ -29,8 +29,12 @@ Link: [Download](https://drive.google.com/file/d/1KvWXFyeRwZDlOGOM7o1ewIrz8I5JX-
    - Camera X
    - Retrofit
 5. Machine Learning
-   - First nested list item
-   - 
+   - Tensorflow
+   - Keras
+   - Matplotlib
+   - NumPy
+   - Pandas
+   - Scikit-learn
 
 ## Getting Started
 1. Prerequisites:
