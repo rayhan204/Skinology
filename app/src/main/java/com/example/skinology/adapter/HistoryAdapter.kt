@@ -27,7 +27,7 @@ class HistoryAdapter(
     class HistoryViewHolder(
         private val binding: ItemHistoryBinding,
         private val onItemClick: (HistoryEntity) -> Unit,
-        private val onDeleteClick: (HistoryEntity) -> Unit // Callback untuk delete
+        private val onDeleteClick: (HistoryEntity) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(history: HistoryEntity) {
@@ -44,6 +44,7 @@ class HistoryAdapter(
             binding.tvDelete.setOnClickListener {
                 onDeleteClick(history)
             }
+
         }
     }
 

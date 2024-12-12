@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="History"
+        app:title="Riwayat"
         app:titleTextAppearance="@style/ToolbarTitle"
         app:titleCentered="true" />
 
@@ -42,8 +42,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
         tools:listitem="@layout/item_history"/>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

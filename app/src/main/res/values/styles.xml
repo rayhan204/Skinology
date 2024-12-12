@@ -4,6 +4,10 @@
         <item name="android:textSize">32sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="ToolbarSubtitleTextAppearance" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
     <style name="ToolbarTitle" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>

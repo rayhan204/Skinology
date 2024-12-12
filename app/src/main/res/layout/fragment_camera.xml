@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:title="Scan Your Skin"
+        app:title="Pindai Wajah Anda"
         app:titleTextAppearance="@style/ToolbarTitle"
         app:titleCentered="true" />
 
@@ -52,7 +52,7 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/primary"
         android:background="@drawable/rounded_button"
-        android:text="Analyze"
+        android:text="@string/analyze"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/previewImageView"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="Image"
+                android:text="@string/galery"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>

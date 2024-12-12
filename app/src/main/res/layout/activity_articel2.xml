@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Article"
+        app:title="Artikel"
         app:titleTextAppearance="@style/ToolbarTitle"
         app:titleCentered="true"
         app:navigationIcon="@drawable/ic_back" />
@@ -42,10 +42,10 @@
         android:gravity="center"
         android:text="@string/time_to"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topAppBar" />
 
@@ -56,7 +56,7 @@
         android:gravity="center"
         android:text="@string/know_your_skin"
         android:textColor="@color/black"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/text_1"
         app:layout_constraintEnd_toEndOf="parent"
