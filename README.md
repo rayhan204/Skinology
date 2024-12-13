@@ -45,7 +45,7 @@ Link: [Download](https://drive.google.com/file/d/1KvWXFyeRwZDlOGOM7o1ewIrz8I5JX-
 ## Getting Started
 1. Prerequisites:
    - Android
-   - Camera
+   - Camera and Gallery
    - Internet Connection
 2. Installation:
    - Download the .apk file: [Download](https://drive.google.com/file/d/1KvWXFyeRwZDlOGOM7o1ewIrz8I5JX-Zf/view?usp=sharing)
