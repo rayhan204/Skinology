@@ -1,5 +1,6 @@
 package com.example.skinology.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -48,10 +49,12 @@ class ArticleAdapter(private val onItemClick: (ArticleEntity) -> Unit) :
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticleEntity>() {
             override fun areItemsTheSame(oldItem: ArticleEntity, newItem: ArticleEntity): Boolean {
+                Log.d("DIFF_CALLBACK", "Comparing IDs: ${oldItem.id} vs ${newItem.id}")
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: ArticleEntity, newItem: ArticleEntity): Boolean {
+                Log.d("DIFF_CALLBACK", "Comparing Content: $oldItem vs $newItem")
                 return oldItem == newItem
             }
         }

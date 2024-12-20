@@ -1,6 +1,8 @@
 package com.example.skinology.ui.camera
 
 import android.content.Intent
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,6 +36,22 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
     private val cameraViewModel: CameraViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(requireContext(), "Permission request granted", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(requireContext(), "Permission request denied", Toast.LENGTH_LONG).show()
+            }
+        }
+    private fun allPermissionsGranted() =
+        ContextCompat.checkSelfPermission(
+            requireContext(),
+            REQUIRED_PERMISSION
+        ) == PackageManager.PERMISSION_GRANTED
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -75,6 +94,10 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
 
         cameraViewModel.currentImageUri?.let {
             binding.previewImageView.setImageURI(it)
+        }
+
+        if (!allPermissionsGranted()) {
+            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
         binding.buttonImg.setOnClickListener { startGallery() }
         binding.buttonAnalyze.setOnClickListener { analyzeImage() }
@@ -151,5 +174,9 @@ class CameraFragment : Fragment(), ImageClassifierHelper.ClassifierListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 }

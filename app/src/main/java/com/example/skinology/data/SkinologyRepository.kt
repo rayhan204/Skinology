@@ -1,5 +1,6 @@
 package com.example.skinology.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.map
@@ -43,19 +44,22 @@ class SkinologyRepository private constructor(
     fun getAllSkinTypes(): LiveData<Result<List<ArticleEntity>>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
         try {
-            val localArticles = skinologyDao.getAllArticles()  // This returns LiveData<List<ArticleEntity>>
+            val localArticles = skinologyDao.getAllArticles()
+            Log.d("repository", "Local Article: ${localArticles.value}")
 
-            val localData = localArticles.value // Access the data directly (works because we are emitting this result in liveData builder)
+            val localData = localArticles.value
 
             if (!localData.isNullOrEmpty()) {
                 emit(Result.Success(localData))
             }
 
             val response = apiService.getAllSkinTypes()
+            Log.d("repository", "Api response: $response")
 
             val articles = mutableListOf<ArticleEntity>()
 
             response.normal.let { normalItems ->
+                Log.d("repository", "Normal skin data: $normalItems")
                 articles.addAll(normalItems.map { normalItem ->
                     ArticleEntity(
                         id = normalItem.id.toString(),
@@ -68,6 +72,7 @@ class SkinologyRepository private constructor(
             }
 
             response.oily.let { oilyItems ->
+                Log.d("repository", "Oily skin data: $oilyItems")
                 articles.addAll(oilyItems.map { oilyItem ->
                     ArticleEntity(
                         id = oilyItem.id.toString(),
@@ -80,6 +85,7 @@ class SkinologyRepository private constructor(
             }
 
             response.acne.let { acneItems ->
+                Log.d("repository", "acne skin data: $acneItems")
                 articles.addAll(acneItems.map { acneItem ->
                     ArticleEntity(
                         id = acneItem.id.toString(),
@@ -92,6 +98,7 @@ class SkinologyRepository private constructor(
             }
 
             response.dry.let { dryItems ->
+                Log.d("repository", "dry skin data: $dryItems")
                 articles.addAll(dryItems.map { dryItem ->
                     ArticleEntity(
                         id = dryItem.id.toString(),
