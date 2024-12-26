@@ -2,6 +2,7 @@ package com.example.skinology.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,16 +74,20 @@ class HomeFragment : Fragment() {
         homeViewModel.getAllSkinTypes.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
-                    // Show progress bar while loading
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Result.Success -> {
-                    // Hide progress bar and update list when data is loaded
                     binding.progressBar.visibility = View.GONE
-                    articleAdapter.submitList(result.data.toMutableList()) // Submit list directly
+                    val articles = result.data
+                    if (articles.isNotEmpty()) {
+                        Log.d("HomeFragment", "Articles loaded: $articles")
+                        articleAdapter.submitList(articles.toMutableList())
+                    } else {
+                        Log.d("HomeFragment", "Articles list is empty or null")
+                        Toast.makeText(requireContext(), "No articles available", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 is Result.Error -> {
-                    // Hide progress bar and show error message
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "Error: ${result.error}", Toast.LENGTH_SHORT).show()
                 }
