@@ -14,7 +14,7 @@
 <p align="justify"> Skinology is an Android-based application that leverages machine learning and cloud computing to identify skin types in real-time. This project aims to address the lack of understanding about skin types, which often leads to improper skincare product usage. Using a CNN model through transfer learning, the application analyzes users' skin images and provides scientific articles related to suitable skincare treatments. Developed by a multidisciplinary team, Skinology offers a data-driven solution for skin education, equipped with user-friendly UI/UX and efficient cloud infrastructure, enabling accurate and accessible information to support better skin health.</p>
 
 ## Skinology App Download
-Link: [Download](https://drive.google.com/file/d/1KvWXFyeRwZDlOGOM7o1ewIrz8I5JX-Zf/view?usp=sharing)
+Link: [Download](https://drive.google.com/file/d/13TwGuherweRgEFac7vW9T8dPmkTgZJqw/view?usp=sharing)
 
 ## Demo Project
 ![Demo](https://github.com/rayhan204/Skinology/blob/main/demo_android.gif)
