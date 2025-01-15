@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.skinology.data.SkinologyRepository
 import com.example.skinology.di.Injection
+import com.example.skinology.ui.add.AddViewModel
 import com.example.skinology.ui.article2.ArticleViewModel
 import com.example.skinology.ui.detailarticle.DetailViewModel
 import com.example.skinology.ui.camera.CameraViewModel
@@ -34,6 +35,9 @@ class ViewModelFactory (private val repository: SkinologyRepository): ViewModelP
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(AddViewModel::class.java) -> {
+                AddViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
