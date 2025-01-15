@@ -24,11 +24,15 @@ interface SkinologyDao {
     suspend fun insertArticles(articles: List<ArticleEntity>)
 
     @Query("SELECT * FROM article")
-    fun getAllArticles(): LiveData<List<ArticleEntity>>
+    suspend fun getAllArticles(): List<ArticleEntity>
 
     @Query("SELECT * FROM article WHERE id = :articleId LIMIT 1")
     suspend fun getArticleId(articleId: String): ArticleEntity
 
     @Query("SELECT * FROM article WHERE category = :category")
     suspend fun getArticlesByCategoryDirect(category: String): List<ArticleEntity>
+
+    @Query("UPDATE article SET name = :newName, photo = :newPhoto, description = :newDescription WHERE id = :id")
+    suspend fun updateArticleDetails(id: String, newName: String, newPhoto: String, newDescription: String)
+
 }

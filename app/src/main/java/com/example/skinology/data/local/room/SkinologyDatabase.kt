@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.skinology.data.local.entity.ArticleEntity
 import com.example.skinology.data.local.entity.HistoryEntity
 
-@Database(entities = [HistoryEntity::class, ArticleEntity::class], version = 1, exportSchema = false)
+@Database(entities = [HistoryEntity::class, ArticleEntity::class], version = 3, exportSchema = false)
 abstract class SkinologyDatabase : RoomDatabase() {
 
     abstract fun skinologyDao(): SkinologyDao
@@ -21,7 +21,7 @@ abstract class SkinologyDatabase : RoomDatabase() {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     SkinologyDatabase::class.java, "skinology_db"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
             }
     }
 }

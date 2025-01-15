@@ -1,5 +1,6 @@
 package com.example.skinology.ui.article2
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import com.example.skinology.ViewModelFactory
 import com.example.skinology.adapter.ArticleAdapter
 import com.example.skinology.data.Result
 import com.example.skinology.databinding.ActivityArticel2Binding
+import com.example.skinology.ui.add.AddActivity
 import com.example.skinology.ui.detailarticle.DetailArticleActivity
 
 
@@ -41,6 +43,23 @@ class Articel2Activity : AppCompatActivity(), ButtonsFragment.ButtonSelectionLis
 
         setupViewModel()
         setupRecyclerView()
+        setButton()
+    }
+
+    private fun setButton() {
+        binding.fabAddArticle.setOnClickListener {
+            val selectedButton = intent.getStringExtra("SELECTED_BUTTON")
+            val skinType = when {
+                selectedButton.equals("DRY", ignoreCase = true) -> "Dry"
+                selectedButton.equals("OILY", ignoreCase = true) -> "Oily"
+                selectedButton.equals("NORMAL", ignoreCase = true) -> "Normal"
+                selectedButton.equals("ACNE", ignoreCase = true) -> "Acne"
+                else -> "Mengenal Kulit Anda"
+            }
+            val intent = Intent(this, AddActivity::class.java)
+            intent.putExtra("SELECTED_BUTTON", skinType)
+            startActivity(intent)
+        }
     }
 
     private fun setupViewModel() {
@@ -79,6 +98,7 @@ class Articel2Activity : AppCompatActivity(), ButtonsFragment.ButtonSelectionLis
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(this, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "observeViewModel: ${result.error}")
                 }
             }
         }
