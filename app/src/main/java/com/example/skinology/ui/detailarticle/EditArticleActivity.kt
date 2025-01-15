@@ -1,6 +1,7 @@
 package com.example.skinology.ui.detailarticle
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.example.skinology.MainActivity
 import com.example.skinology.R
 import com.example.skinology.ViewModelFactory
 import com.example.skinology.data.Result
@@ -97,11 +99,33 @@ class EditArticleActivity : AppCompatActivity() {
                     newDescription = newDescription
                 )
                 Toast.makeText(this, "Artikel berhasil diubah", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, DetailArticleActivity::class.java)
-                intent.putExtra("ARTICLE_ID", articleId)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
+        }
+        binding.btnDelete.setOnClickListener {
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Delete Article")
+            builder.setMessage("Do you want to delete article?")
+
+            builder.setPositiveButton("Yes") { dialog, _ ->
+                val articleId = intent.getStringExtra("ARTICLE_ID")
+
+                if (articleId != null) {
+                    viewModel.deleteArticlesById(articleId)
+                }
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            }
+            builder.setNegativeButton("No"){dialog, _ ->
+
+            }
+            val dialog = builder.create()
+            dialog.show()
         }
     }
 

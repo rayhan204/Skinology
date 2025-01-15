@@ -80,7 +80,6 @@ class HomeFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     val articles = result.data
                     if (articles.isNotEmpty()) {
-                        Log.d("HomeFragment", "Articles loaded: $articles")
                         articleAdapter.submitList(articles.toMutableList())
                     } else {
                         Log.d("HomeFragment", "Articles list is empty or null")
@@ -99,4 +98,6 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

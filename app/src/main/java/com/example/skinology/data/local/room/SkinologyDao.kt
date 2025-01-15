@@ -35,4 +35,7 @@ interface SkinologyDao {
     @Query("UPDATE article SET name = :newName, photo = :newPhoto, description = :newDescription WHERE id = :id")
     suspend fun updateArticleDetails(id: String, newName: String, newPhoto: String, newDescription: String)
 
+    @Query("DELETE FROM article WHERE id = :id")
+    suspend fun deleteArticles(id: String)
+
 }

@@ -25,5 +25,10 @@ class DetailViewModel(private val repository: SkinologyRepository): ViewModel() 
             }
         }
     }
+    fun deleteArticlesById(id: String) {
+        viewModelScope.launch {
+            repository.deleteArticlesById(id)
+        }
+    }
 
 }
