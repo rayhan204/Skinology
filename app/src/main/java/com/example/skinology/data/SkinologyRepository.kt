@@ -200,6 +200,11 @@ class SkinologyRepository private constructor(
     suspend fun addArticles(articles: List<ArticleEntity>) {
         skinologyDao.insertArticles(articles)
     }
+    suspend fun deleteArticlesById(id: String) {
+        withContext(Dispatchers.IO) {
+            skinologyDao.deleteArticles(id)
+        }
+    }
 
 
     companion object {

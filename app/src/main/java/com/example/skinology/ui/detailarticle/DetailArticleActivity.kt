@@ -110,12 +110,6 @@ class DetailArticleActivity : AppCompatActivity() {
         }
     }
 
-    fun isBase64(string: String): Boolean {
-
-        val base64Pattern = "^([A-Za-z0-9+/=]+)$"
-        return Pattern.matches(base64Pattern, string.trim())
-    }
-
     fun isUrl(string: String): Boolean {
 
         val urlPattern = "^(http|https)://.*$"
