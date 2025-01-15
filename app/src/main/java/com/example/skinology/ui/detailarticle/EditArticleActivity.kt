@@ -151,11 +151,22 @@ class EditArticleActivity : AppCompatActivity() {
         val bitmap = BitmapFactory.decodeStream(inputStream)
         val byteArrayOutputStream = ByteArrayOutputStream()
 
-
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream)
+        val resizedBitmap = resizeBitmap(bitmap, 800, 800)
+        resizedBitmap.compress(Bitmap.CompressFormat.PNG, 30, byteArrayOutputStream)
 
 
         val byteArray = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
+    }
+
+    fun resizeBitmap(bitmap: Bitmap, maxWidth: Int, maxHeight: Int): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+        val aspectRatio = width.toFloat() / height.toFloat()
+
+        val newWidth = if (aspectRatio > 1) maxWidth else (maxHeight * aspectRatio).toInt()
+        val newHeight = if (aspectRatio > 1) (maxWidth / aspectRatio).toInt() else maxHeight
+
+        return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
     }
 }

@@ -1,5 +1,7 @@
 package com.example.skinology
 
+import android.annotation.SuppressLint
+import android.database.CursorWindow
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,16 +11,25 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.skinology.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("DiscouragedPrivateApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        try {
+            val field = CursorWindow::class.java.getDeclaredField("sCursorWindowSize")
+            field.isAccessible = true
+            field.set(null, 1024 * 1024 * 10)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         setSupportActionBar(binding.topAppBar)
 
         val navView: BottomNavigationView = binding.navView
