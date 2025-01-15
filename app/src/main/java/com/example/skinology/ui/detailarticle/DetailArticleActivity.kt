@@ -1,17 +1,25 @@
 package com.example.skinology.ui.detailarticle
 
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.example.skinology.ViewModelFactory
 import com.example.skinology.data.Result
 import com.example.skinology.data.local.entity.ArticleEntity
 import com.example.skinology.databinding.ActivityDetailArticelBinding
+import java.util.regex.Pattern
 
 class DetailArticleActivity : AppCompatActivity() {
 
@@ -41,6 +49,17 @@ class DetailArticleActivity : AppCompatActivity() {
         }
 
         setupToolbar()
+        setButton()
+    }
+
+    private fun setButton() {
+        binding.fabEdit.setOnClickListener {
+            val articleId = intent.getStringExtra("ARTICLE_ID")
+            val intent = Intent(this, EditArticleActivity::class.java)
+            intent.putExtra("ARTICLE_ID", articleId)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setupToolbar() {
@@ -76,11 +95,40 @@ class DetailArticleActivity : AppCompatActivity() {
         binding.apply {
             textArticleTitle.text = article.name
             textArticleDetail.text = article.description
+            loadImage(this@DetailArticleActivity,binding.imageArticle,article.photo)
+        }
+    }
+    fun loadImage(context: Context, imageView: ImageView, imageSource: String) {
+        if (isUrl(imageSource)) {
 
-            Glide.with(this@DetailArticleActivity)
-                .load(article.photo)
-                .centerCrop()
-                .into(imageArticle)
+            Glide.with(context)
+                .load(imageSource)
+                .into(imageView)
+        } else{
+            val bitmap = base64ToBitmap(imageSource)
+            imageView.setImageBitmap(bitmap)
+        }
+    }
+
+    fun isBase64(string: String): Boolean {
+
+        val base64Pattern = "^([A-Za-z0-9+/=]+)$"
+        return Pattern.matches(base64Pattern, string.trim())
+    }
+
+    fun isUrl(string: String): Boolean {
+
+        val urlPattern = "^(http|https)://.*$"
+        return Pattern.matches(urlPattern, string.trim())
+    }
+
+    fun base64ToBitmap(base64String: String): Bitmap? {
+        return try {
+            val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
+            BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            null
         }
     }
 }

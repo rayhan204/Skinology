@@ -14,12 +14,12 @@ data class ArticleEntity(
     var name: String = "",
 
     @ColumnInfo(name = "photo")
-    var photo:  String = "",
+    var photo: String = "",
 
     @ColumnInfo(name = "description")
     var description: String = "",
 
     @ColumnInfo(name = "category")
-    var category: String = ""
+    var category: String = "",
 
 )
